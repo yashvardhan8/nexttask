@@ -4,6 +4,10 @@ import { useState } from "react";
 import {
   DndContext,
   closestCenter,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
 } from "@dnd-kit/core";
 
 import BoardColumn from "./BoardColumn";
@@ -13,6 +17,16 @@ export default function BoardClient({
 }) {
   const [tasks, setTasks] =
     useState(initialTasks);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 150,
+        tolerance: 5,
+      },
+    })
+  );
 
   const handleDragEnd = async (
     event
@@ -79,10 +93,11 @@ export default function BoardClient({
     (task) =>
       task.status ===
       "Completed"
-  );
+    );
 
   return (
     <DndContext
+      sensors={sensors}
       collisionDetection={
         closestCenter
       }
