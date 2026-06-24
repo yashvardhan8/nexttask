@@ -23,7 +23,7 @@ export default function TaskItem({ task }) {
       style={style}
       {...listeners}
       {...attributes}
-      className="bg-white dark:bg-slate-900 rounded-xl p-5 shadow-lg border cursor-grab active:cursor-grabbing"
+      className="bg-white dark:bg-slate-900 rounded-xl p-5 shadow-lg border cursor-grab active:cursor-grabbing touch-none"
     >
       <h3 className="text-lg font-semibold tracking-tight">
         {task.title}
